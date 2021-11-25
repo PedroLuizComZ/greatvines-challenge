@@ -6,6 +6,10 @@ Create an .env file based on the .env.example
 
 In the project directory, you can run:
 
+### `docker-compose up -d --build`
+
+Runs the app with Docker
+
 ### `yarn start`
 
 Runs the app in the development mode.\
