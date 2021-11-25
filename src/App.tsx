@@ -1,23 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import "./App.css";
+import { SALES_FORCE_LOGIN_URL } from "./constants";
+import axios from "axios";
 
 function App() {
+  function handleClick() {
+    window.location.href = SALES_FORCE_LOGIN_URL;
+  }
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+
+    console.log(url.hash.split("&"));
+
+    if (url.hash) {
+      const token = url.hash.split("&")[0].replace("#access_token=", "");
+      Cookies.set("token", token);
+    }
+  }, []);
+
+  function handleText() {
+    axios.get(
+      "https://bluelightco-dev-ed.my.salesforce.com/services/data/v53.0/query/?q=SELECT+name+from+Account",
+      { headers: { Authorization: Cookies.get("token") || "" } }
+    );
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button type="button" onClick={handleClick}>
+          Login
+        </button>
+
+        <button type="button" onClick={handleText}>
+          getContacts
+        </button>
       </header>
     </div>
   );
