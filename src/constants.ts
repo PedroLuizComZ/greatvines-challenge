@@ -1,1 +1,0 @@
-export const SALES_FORCE_LOGIN_URL = "http://login.salesforce.com/services/oauth2/authorize?client_id=3MVG9yZ.WNe6byQDn_tc_.9aCjm_xoITkY9Wk9TX1us_oY_8ImbWF6cUgmkrRWmL4xlitLBRQgGA9pupDi.76&redirect_uri=https%3A//greatvines-challenge.vercel.app&response_type=token&scopes=api%20id"
