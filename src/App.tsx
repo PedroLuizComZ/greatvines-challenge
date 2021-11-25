@@ -17,14 +17,24 @@ function App() {
     if (url.hash) {
       const token = url.hash.split("&")[0].replace("#access_token=", "");
       Cookies.set("token", token);
+
+      const instanceUrl = url.hash.split("&")[2].replace("instance_url=", "");
+      Cookies.set("instanceUrl", instanceUrl);
     }
   }, []);
 
   function handleText() {
-    axios.get(
-      "https://bluelightco-dev-ed.my.salesforce.com/services/data/v53.0/query/?q=SELECT+name+from+Account",
-      { headers: { Authorization: Cookies.get("token") || "" } }
-    );
+    axios
+      .get(
+        "https://bluelightco-dev-ed.my.salesforce.com/services/data/v53.0/query/?q=SELECT+name+from+Account",
+        { headers: { Authorization: Cookies.get("token") || "" } }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
