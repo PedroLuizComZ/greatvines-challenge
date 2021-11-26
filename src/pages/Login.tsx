@@ -6,7 +6,14 @@ const Login: React.FC = () => {
   let navigate = useNavigate();
 
   function handleClick() {
-    window.location.href = String(process.env.REACT_APP_SALES_FORCE_LOGIN_URL);
+    const SalesForceURL = process.env.REACT_APP_SALES_FORCE_LOGIN_URL;
+    if (SalesForceURL) {
+      window.location.href = String(SalesForceURL);
+    } else {
+      alert(
+        "Check the environment files, for more details see the Readme file"
+      );
+    }
   }
 
   useEffect(() => {
@@ -19,11 +26,9 @@ const Login: React.FC = () => {
       const instanceUrl = url.hash.split("&")[2].replace("instance_url=", "");
       Cookies.set("instanceUrl", decodeURIComponent(instanceUrl));
 
-      navigate('/home')
+      navigate("/home");
     }
   }, [navigate]);
-
- 
 
   return (
     <div className="App">
@@ -35,6 +40,6 @@ const Login: React.FC = () => {
       </main>
     </div>
   );
-}
+};
 
 export default Login;

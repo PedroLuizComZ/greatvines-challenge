@@ -13,8 +13,6 @@ const CreateContact: React.FC = () => {
       LastName: lastNameInput.current!.value,
     };
 
-    console.log(dataContact);
-
     const response = await CreateContactController(dataContact);
     if (response.status === "success") {
       return navigate("/contact-list");

@@ -13,7 +13,6 @@ const ContactList: React.FC = () => {
 
   async function getContactList() {
     const response = await ContactListController();
-    console.log(response);
     setContactsList(response);
     setLoading(false);
   }
